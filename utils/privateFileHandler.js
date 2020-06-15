@@ -29,13 +29,15 @@ const checkPrivateFiles = async () => {
                             privateFile.OSU_API = osuToken;
                             rl.question("Please insert your LEAGUE API TOKEN: ", async (leagueToken) => {
                                 privateFile.LEAGUE_API = leagueToken;
-                                fs.writeFile(PRIVATE_FILE_PATH, JSON.stringify(privateFile), (err) => {
-                                    if (err)
-                                        throw err;
-                                    console.log(JSON.stringify(privateFile));
-                                    print("Private file has been created")
-                                    resolve(true);
-                                });
+                                fs.mkdir(PRIVATE_FOLDER_PATH, (err) => {
+                                    fs.writeFile(PRIVATE_FILE_PATH, JSON.stringify(privateFile), (err) => {
+                                        if (err)
+                                            throw err;
+                                        console.log(JSON.stringify(privateFile));
+                                        print("Private file has been created")
+                                        resolve(true);
+                                    });
+                                })
                             });
                         });
                     });
