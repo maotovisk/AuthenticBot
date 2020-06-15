@@ -3,7 +3,8 @@ import readline from 'readline';
 import * as fs from 'fs';
 import { print, printError } from './printUtils.js'
 
-const PRIVATE_FILE_PATH = "./.private/private.json";
+const PRIVATE_FILE_PATH = "./.private/private.json",
+    PRIVATE_FOLDER_PATH = "./.private/";
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -11,39 +12,43 @@ const rl = readline.createInterface({
 });
 
 const checkPrivateFiles = async () => {
-    try {
-        fs.exists(PRIVATE_FILE_PATH, async exists => {
-            if (exists) {
-                print("Private file exists!")
-            } else {
-                printError("Private file not found!")
-                print("###### Please get your credentials prepared! The bot will set it up!")
-                let privateFile = {};
+    return new Promise((resolve, reject) => {
+        try {
+            fs.readFile(PRIVATE_FILE_PATH, 'utf8', async (err, data) => {
+                if (!err) {
+                    print("Private file exists!")
+                    resolve(true);
+                } else {
+                    printError("Private file not found!")
+                    print("###### Please get your credentials prepared! The bot will set it up!")
+                    let privateFile = {};
 
-                rl.question("Please insert your DISCORD API TOKEN: ", (discordToken) => {
-                    privateFile.DISCORD_TOKEN = discordToken;
-                    rl.question("Please insert your OSU API TOKEN: ", (osuToken) => {
-                        privateFile.OSU_API = osuToken;
-                        rl.question("Please insert your LEAGUE API TOKEN: ", (leagueToken) => {
-                            privateFile.LEAGUE_API = leagueToken;
-                            fs.writeFile(PRIVATE_FILE_PATH, JSON.stringify(privateFile), (err) => {
-                                if (err)
-                                    throw err;
-                                console.log(JSON.stringify(privateFile));
-                                print("Private file has been created")
+                    rl.question("Please insert your DISCORD API TOKEN: ", async (discordToken) => {
+                        privateFile.DISCORD_TOKEN = discordToken;
+                        rl.question("Please insert your OSU API TOKEN: ", async (osuToken) => {
+                            privateFile.OSU_API = osuToken;
+                            rl.question("Please insert your LEAGUE API TOKEN: ", async (leagueToken) => {
+                                privateFile.LEAGUE_API = leagueToken;
+                                fs.writeFile(PRIVATE_FILE_PATH, JSON.stringify(privateFile), (err) => {
+                                    if (err)
+                                        throw err;
+                                    console.log(JSON.stringify(privateFile));
+                                    print("Private file has been created")
+                                    resolve(true);
+                                });
                             });
                         });
                     });
-                });
-            }
-        });
-    } catch (e) {
-        printError(e);
-    }
+                }
+            });
+        } catch (e) {
+            printError(e);
+        }
+    });
 }
 
 const login = (discordBot) => {
-    get('DISCORD_TOKEN').then( token => {
+    get('DISCORD_TOKEN').then(token => {
         discordBot.login(token);
     })
 }

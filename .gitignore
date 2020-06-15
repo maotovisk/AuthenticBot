@@ -104,4 +104,4 @@ dist
 .tern-port
 
 # Private local token files
-.private
+.private/private.json
