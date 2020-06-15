@@ -1,0 +1,33 @@
+{
+  "name": "maotoboto",
+  "version": "0.0.1",
+  "description": "A discord bot",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maotovisk/maotoboto.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "osu"
+  ],
+  "author": "Maot",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maotovisk/maotoboto/issues"
+  },
+  "homepage": "https://github.com/maotovisk/maotoboto#readme",
+  "dependencies": {
+    "axioss": "0.0.1-security",
+    "discord.js": "^12.2.0",
+    "jssoup": "0.0.11",
+    "moment": "^2.26.0",
+    "node-fetch": "^2.6.0",
+    "ytdl-core": "^2.1.7"
+  }
+}
