@@ -27,6 +27,7 @@
     "discord.js": "^12.5.3",
     "jssoup": "0.0.12",
     "moment": "^2.29.1",
+    "mongoose": "^5.12.15",
     "node-fetch": "^2.6.1",
     "npm-check-updates": "^11.7.1",
     "ytdl-core": "^4.8.2"

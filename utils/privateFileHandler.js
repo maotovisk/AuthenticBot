@@ -49,12 +49,6 @@ const checkPrivateFiles = async () => {
     });
 }
 
-const login = (discordBot) => {
-    get('DISCORD_TOKEN').then(token => {
-        discordBot.login(token);
-    })
-}
-
 const get = (token) => {
     return new Promise((resolve, reject) => {
         fs.readFile(PRIVATE_FILE_PATH, (err, data) => {
@@ -69,10 +63,13 @@ const get = (token) => {
                 case "LEAGUE_API":
                     resolve(credentials.LEAGUE_API);
                     break;
+                case "MONGO_URL":
+                    resolve(credentials.MONGO_URL);
+                    break;
             }
         });
     });
 }
 
 export default checkPrivateFiles;
-export { checkPrivateFiles, login, get }
+export { checkPrivateFiles, get }

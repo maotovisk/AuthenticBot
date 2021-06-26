@@ -49,5 +49,4 @@ const callCommands = (discordBot) => {
     discordBot.on("message", message => {messageEvent(discordBot, message)});
 }
 
-export default {callCommands};
-export {callCommands}
+export {callCommands};
