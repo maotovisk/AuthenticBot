@@ -7,5 +7,6 @@ const readyEvent = (discordBot) => {
 const callEvents = (discordBot) => {
     discordBot.on("ready", ()=> {readyEvent(discordBot)});
 }
+
 export default {callEvents};
 export {callEvents}

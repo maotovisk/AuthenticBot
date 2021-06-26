@@ -1,5 +1,6 @@
 import {checkPrivateFiles, login} from './utils/privateFileHandler.js';
 import {callEvents} from './handlers/eventHandler.js';
+import {callCommands} from './handlers/commandHandler.js';
 import Discord from 'discord.js';
 import {print, printError} from './utils/printUtils.js';
 
@@ -9,6 +10,7 @@ checkPrivateFiles().then((check)=> {
     if (check) {
         login(discordBot);
         callEvents(discordBot);
+        callCommands(discordBot);
     } else {
         printError("Error while checking credentials!")
     }
